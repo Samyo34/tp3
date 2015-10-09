@@ -21,10 +21,17 @@ GameWindow::GameWindow()
 {
 }
 
+GameWindow::GameWindow(int fps){
+    this->fps = fps;
+}
+
 void GameWindow::initialize()
 {
     const qreal retinaScale = devicePixelRatio();
-
+    //this->camera = new Camera();
+    this->timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
+    timer->start(1000/this->fps);
 
     glViewport(0, 0, width() * retinaScale, height() * retinaScale);
 
@@ -34,7 +41,7 @@ void GameWindow::initialize()
     glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
 
-    loadMap(":/heightmap-1.png");
+    loadMap(":/heightmap-2.png");
 
 }
 
@@ -72,9 +79,13 @@ void GameWindow::render()
 
 
     glLoadIdentity();
-   glScalef(ss,ss,ss);
+   /* glScalef(ss,ss,ss);// zoom, les trois paramètres correspondent aux trois axes
     glRotatef(rotX,1.0f,0.0f,0.0f);
-    glRotatef(rotY,0.0f,0.0f,1.0f);
+    glRotatef(rotY,0.0f,0.0f,1.0f);*/
+
+    //this->camera->rotate();
+    this->camera->rotation();
+    this->camera->scale();
 
     switch(etat)
     {
@@ -113,7 +124,7 @@ bool GameWindow::event(QEvent *event)
     {
     case QEvent::UpdateRequest:
 
-        renderNow();
+       // renderNow();
         return true;
     default:
         return QWindow::event(event);
@@ -125,26 +136,32 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case 'Z':
-        ss += 0.10f;
+        this->camera->setScale(0.10f);
+        //ss += 0.10f;
         break;
     case 'S':
-        ss -= 0.10f;
+        this->camera->setScale(-0.10f);
+        //ss -= 0.10f;
         break;
     case 'A':
-        rotX += 1.0f;
+        this->camera->setRot(1.0f,0);
+        //rotX += 1.0f;
         break;
     case 'E':
-        rotX -= 1.0f;
+        this->camera->setRot(-1.0f,0);
+        //rotX -= 1.0f;
         break;
     case 'Q':
-        rotY += 1.0f;
+        this->camera->setRot(0,1.0f);
+        //rotY += 1.0f;
         break;
     case 'D':
-        rotY -= 1.0f;
+        this->camera->setRot(0,-1.0f);
+        //rotY -= 1.0f;
         break;
     case 'W':
         etat ++;
-        if(etat > 5)
+        if(etat>5);
             etat = 0;
         break;
     case 'X':
@@ -158,7 +175,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         loadMap(depth);
         break;
     }
-    renderNow();
+    //renderNow();
 }
 
 
@@ -430,4 +447,23 @@ void GameWindow::displayColor(float alt)
         glColor3f(0.0f, 0.0f, 1.0f);
     }
 
+}
+
+void GameWindow::changeEtat(int etat)
+{
+    this->etat = etat;
+}
+
+int GameWindow::setServer()
+{
+    // TODO initiliser ThreadServer et retourner le numero de port utilisé
+}
+
+void GameWindow::setClient(int port)
+{
+ // TODO : initialiser ThreadClient avec le port Server "port"
+}
+
+void GameWindow::setCamera(Camera*  cam){
+    this->camera=cam;
 }
