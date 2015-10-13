@@ -1,6 +1,14 @@
 INCLUDEPATH += $$PWD
-SOURCES += $$PWD/openglwindow.cpp
-HEADERS += $$PWD/openglwindow.h
+SOURCES += $$PWD/openglwindow.cpp \
+    camera.cpp \
+    gamewindow.cpp \
+    threadclient.cpp \
+    threadserver.cpp
+HEADERS += $$PWD/openglwindow.h \
+    camera.h \
+    gamewindow.h \
+    threadclient.h \
+    threadserver.h
 
 SOURCES += \
     main.cpp
