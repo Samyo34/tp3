@@ -2,24 +2,20 @@
 
 ThreadClient::ThreadClient()
 {
+
+    this->socket = new QTcpSocket();
+    connect(this->socket, SIGNAL(readyRead()),this,SLOT(readData()));// récupérations des données lorsqu'elles arrivent dans la socket
+    this->socket->connectToHost(QHostAddress::LocalHost,4444);// connection au serveur
 }
 
-<<<<<<< HEAD
-ThreadClient::ThreadClient(GameWindow *window)
+void ThreadClient::readData()
 {
-    this->window = window;
+    QString s;
+    while(socket->bytesAvailable() > 0) {
+        QString result = socket->readLine();
+        s += result;
+    }
+
+    qDebug()<<s;
+
 }
-
-void ThreadClient::s_changeS(int season)
-=======
-
-/*void ThreadClient::s_changeS(int season)
->>>>>>> 4dee81498aae2e69e48b4b640e9808a078f3ca3b
-{
-    // TODO : changer la "saison"
-    this->window->changeEtat(season);
-}
-
-/*ThreadClient::run(){
-
-}*/

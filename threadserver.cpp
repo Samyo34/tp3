@@ -3,32 +3,42 @@
 
 ThreadServer::ThreadServer()
 {
-}
+    this->server = new QTcpServer();
 
-<<<<<<< HEAD
-ThreadServer::ThreadServer(GameWindow *window)
-{
-    this->window = window;
-}
+    if (!server->listen(QHostAddress::LocalHost, 4444)) {
+        qDebug() << "Unable to start the server";
+        return;
+    }
+    QString ipAddress;
+    ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
+    qDebug() << "address = " << server->serverAddress() << "\nport = " << server->serverPort();
+    connect(server, SIGNAL(newConnection()), this, SLOT(newClient()));
 
-=======
->>>>>>> 4dee81498aae2e69e48b4b640e9808a078f3ca3b
+    this->time = new QTimer();
+     time->start(10000);
+    connect(time,SIGNAL(timeout()),this,SLOT(emitSeason())); // losrque le timer réalise un tick, envoi le signal
+
+}
 
 void ThreadServer::run(){
     // TODO : attendre 5 minutes envoyer le signal (emit)
-    QTimer* time = new QTimer();
-    int s =0;
-    while(true){
-<<<<<<< HEAD
-        emit changeSeason(s);
-=======
-        //emit changeSeason(s);
->>>>>>> 4dee81498aae2e69e48b4b640e9808a078f3ca3b
-        s++;
-        if(s>4){
-            s =0;
-        }
-        time->start(10000);
-    }
+
+
+}
+
+void ThreadServer::emitSeason()
+{
+    QString string = "changement";
+    std::for_each(this->clients.begin(), this->clients.end(), [string](QTcpSocket *s){
+       s->write(string.toUtf8());
+       s->flush();
+    });
+}
+
+void ThreadServer::newClient()
+{
+    QTcpSocket *clientConnection = server->nextPendingConnection();
+    clients.push_back(clientConnection);
+    qDebug()<<"nouvelle conexion : "<<clientConnection->peerPort();
 }
 

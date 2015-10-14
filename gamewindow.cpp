@@ -40,7 +40,7 @@ void GameWindow::initialize()
     glLoadIdentity();
     glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
-
+    this->client = new ThreadClient();
     loadMap(":/heightmap-2.png");
 
 }
@@ -302,6 +302,7 @@ void GameWindow::displayTrianglesC()
 
 void GameWindow::displayLines()
 {
+
     glColor3f(1.0f, 1.0f, 1.0f);
     glBegin(GL_LINES);
     uint id = 0;
@@ -454,15 +455,6 @@ void GameWindow::changeEtat(int etat)
     this->etat = etat;
 }
 
-int GameWindow::setServer()
-{
-    // TODO initiliser ThreadServer et retourner le numero de port utilisé
-}
-
-void GameWindow::setClient(int port)
-{
- // TODO : initialiser ThreadClient avec le port Server "port"
-}
 
 void GameWindow::setCamera(Camera*  cam){
     this->camera=cam;

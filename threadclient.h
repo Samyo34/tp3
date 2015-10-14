@@ -1,16 +1,18 @@
 #ifndef THREADCLIENT_H
 #define THREADCLIENT_H
 
-#include <QThread>
+#include <QObject>
 #include <QTcpSocket>
+#include <QString>
+#include <QHostAddress>
 
-class ThreadClient : public QThread
+class ThreadClient : public QObject
 {
-
+Q_OBJECT
 public:
     ThreadClient();
     public slots:
-    void s_changeS(int season);
+    void readData();
 
 private:
     QTcpSocket* socket;

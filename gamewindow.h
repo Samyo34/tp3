@@ -31,8 +31,6 @@ public:
     void displayColor(float);
 
     void changeEtat(int etat);
-    int setServer();
-    void setClient(int port);
 
     void loadMap(QString localPath);
 
@@ -48,8 +46,6 @@ private:
     point *p;
 
     ThreadClient* client;
-    ThreadServer* server;
-
 
 
     int carte=1;
