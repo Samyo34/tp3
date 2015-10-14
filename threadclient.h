@@ -17,6 +17,9 @@ public:
 private:
     QTcpSocket* socket;
 
+signals:
+    void change();
+
 };
 
 #endif // THREADCLIENT_H

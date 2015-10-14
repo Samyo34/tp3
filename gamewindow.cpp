@@ -41,6 +41,7 @@ void GameWindow::initialize()
     glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
     this->client = new ThreadClient();
+    connect(client,SIGNAL(change()),this,SLOT(leChangementCMaintenant()));// connection du threadclient avec le gameWindow
     loadMap(":/heightmap-2.png");
 
 }
@@ -458,4 +459,9 @@ void GameWindow::changeEtat(int etat)
 
 void GameWindow::setCamera(Camera*  cam){
     this->camera=cam;
+}
+
+void GameWindow::leChangementCMaintenant()
+{
+    //TODO
 }

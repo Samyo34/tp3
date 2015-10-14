@@ -56,8 +56,8 @@ private:
     float ss = 1.0f;
 private slots:
     void leChangementCMaintenant();
-
-
+    
+    
 };
 
 
