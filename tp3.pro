@@ -4,6 +4,7 @@ SOURCES += $$PWD/openglwindow.cpp \
     threadclient.cpp \
     camera.cpp \
     gamewindow.cpp
+
 HEADERS += $$PWD/openglwindow.h \
     threadserver.h \
     threadclient.h \
@@ -20,4 +21,5 @@ QMAKE_MAC_SDK = macosx10.11
 RESOURCES += \
     gestionnaire.qrc
 
-QT+=network
+QT += network
+TARGET = QTcpSocket

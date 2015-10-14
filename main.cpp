@@ -60,6 +60,7 @@ int main(int argc, char **argv)
     win->show();
     win->setAnimating(true);
 
+<<<<<<< HEAD
     ThreadClient* cl1 = new ThreadClient(win60);
     ThreadClient* cl2 = new ThreadClient(win120);
     ThreadClient* cl3 = new ThreadClient(win);
@@ -71,6 +72,14 @@ int main(int argc, char **argv)
     connect(serv,SIGNAL(changeSeason(int)),cl1,SLOT(s_changeS(int)));
     connect(serv,SIGNAL(changeSeason(int)),cl2,SLOT(s_changeS(int)));
     connect(serv,SIGNAL(changeSeason(int)),cl3,SLOT(s_changeS(int)));
+=======
+
+    /* /!\ il faut envoyer les signaux par le réseaux */
+
+   /* connect(serv,SIGNAL(changeSeason(int)),cl1,SLOT(s_changeS(int)));
+    connect(serv,SIGNAL(changeSeason(int)),cl2,SLOT(s_changeS(int)));
+    connect(serv,SIGNAL(changeSeason(int)),cl3,SLOT(s_changeS(int)));*/
+>>>>>>> 4dee81498aae2e69e48b4b640e9808a078f3ca3b
 
 
     /*GameWindow window;

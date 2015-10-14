@@ -3,21 +3,17 @@
 
 #include <QThread>
 #include <QTcpSocket>
-#include "gamewindow.h"
 
 class ThreadClient : public QThread
 {
 
 public:
     ThreadClient();
-    ThreadClient(GameWindow* window);
-
     public slots:
     void s_changeS(int season);
 
 private:
     QTcpSocket* socket;
-    GameWindow* window;
 
 };
 
