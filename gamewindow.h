@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "threadclient.h"
 #include "threadserver.h"
+#include "neige.h"
 
 
 
@@ -36,6 +37,11 @@ public:
 
     void setCamera(Camera* cam);
 
+    void setColor(GLfloat red,GLfloat green, GLfloat blue);
+    void setSaison(int s);
+    int getSaison();
+
+
 private:
 
     Camera *camera;
@@ -46,14 +52,18 @@ private:
     point *p;
 
     ThreadClient* client;
-
+    Neige* n;
 
     int carte=1;
 
-    int etat = 0;
+    int saison=0; // 0:neutre, 1: ete, 2:automne, 3:hiver,4;printemps;
+
+    GLfloat rouge,vert,bleu;
+    int etat;
     float rotX = -45.0;
     float rotY = -45.0;
     float ss = 1.0f;
+
 private slots:
     void leChangementCMaintenant();
 

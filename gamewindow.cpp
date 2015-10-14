@@ -32,16 +32,19 @@ void GameWindow::initialize()
     this->timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(1000/this->fps);
-
+    this->rouge=1.0f;
+    this->vert=1.0f;
+    this->bleu=1.0f;
+    this->etat =0;
     glViewport(0, 0, width() * retinaScale, height() * retinaScale);
-
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    n = new Neige(width(),height());
+     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
     this->client = new ThreadClient();
-    connect(client,SIGNAL(change()),this,SLOT(leChangementCMaintenant()));// connection du threadclient avec le gameWindow
+    connect(client,SIGNAL(change()),this,SLOT(leChangementCMaintenant()));// connexion du threadclient avec le gameWindow
     loadMap(":/heightmap-2.png");
 
 }
@@ -83,12 +86,12 @@ void GameWindow::render()
    /* glScalef(ss,ss,ss);// zoom, les trois paramètres correspondent aux trois axes
     glRotatef(rotX,1.0f,0.0f,0.0f);
     glRotatef(rotY,0.0f,0.0f,1.0f);*/
-
+    n->update();
+    n->draw();
     //this->camera->rotate();
     this->camera->rotation();
     this->camera->scale();
-
-    switch(etat)
+    switch(camera->getEtat())
     {
     case 0:
         displayPoints();
@@ -161,9 +164,10 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         //rotY -= 1.0f;
         break;
     case 'W':
-        etat ++;
-        if(etat>5);
-            etat = 0;
+        camera->setEtat(camera->getEtat()+1);
+        if(camera->getEtat()>5){
+            camera->setEtat(0);
+        }
         break;
     case 'X':
         carte ++;
@@ -182,7 +186,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
 
 void GameWindow::displayPoints()
 {
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glColor3f(rouge, vert, bleu);
     glBegin(GL_POINTS);
     uint id = 0;
     for(int i = 0; i < m_image.width(); i++)
@@ -203,7 +207,7 @@ void GameWindow::displayPoints()
 
 void GameWindow::displayTriangles()
 {
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glColor3f(rouge, vert, bleu);
     glBegin(GL_TRIANGLES);
     uint id = 0;
 
@@ -253,7 +257,7 @@ void GameWindow::displayTriangles()
 
 void GameWindow::displayTrianglesC()
 {
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glColor3f(rouge, vert, bleu);
     glBegin(GL_TRIANGLES);
     uint id = 0;
 
@@ -304,7 +308,7 @@ void GameWindow::displayTrianglesC()
 void GameWindow::displayLines()
 {
 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glColor3f(rouge, vert, bleu);
     glBegin(GL_LINES);
     uint id = 0;
 
@@ -461,7 +465,31 @@ void GameWindow::setCamera(Camera*  cam){
     this->camera=cam;
 }
 
+void GameWindow::setColor(GLfloat red, GLfloat green, GLfloat blue)
+{
+    this->rouge =red;
+    this->vert =green;
+    this->bleu = blue;
+}
+
+void GameWindow::setSaison(int s)
+{
+    this->saison=s;
+}
+
+int GameWindow::getSaison()
+{
+    return this->saison;
+}
+
+
 void GameWindow::leChangementCMaintenant()
 {
+    qDebug()<<"changement de saison !";
+    int sais = getSaison()+1;
+    if(sais>4){
+        sais = 1;
+    }
+    setSaison(sais);
     //TODO
 }

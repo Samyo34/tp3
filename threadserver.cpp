@@ -39,6 +39,6 @@ void ThreadServer::newClient()
 {
     QTcpSocket *clientConnection = server->nextPendingConnection();
     clients.push_back(clientConnection);
-    qDebug()<<"nouvelle conexion : "<<clientConnection->peerPort();
+    qDebug()<<"TServ : nouvelle conexion : "<<clientConnection->peerPort();
 }
 

@@ -4,14 +4,16 @@ SOURCES += $$PWD/openglwindow.cpp \
     threadclient.cpp \
     camera.cpp \
     gamewindow.cpp \
-    fenetreserver.cpp
+    fenetreserver.cpp \
+    neige.cpp
 
 HEADERS += $$PWD/openglwindow.h \
     threadserver.h \
     threadclient.h \
     camera.h \
     gamewindow.h \
-    fenetreserver.h
+    fenetreserver.h \
+    neige.h
 
 SOURCES += \
     main.cpp

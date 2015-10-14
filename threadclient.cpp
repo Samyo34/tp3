@@ -16,6 +16,7 @@ void ThreadClient::readData()
         s += result;
     }
 
-    qDebug()<<s;
-
+    qDebug()<<"TCli : "<<s;
+    emit change();
+    qDebug()<<"TCli : la";
 }

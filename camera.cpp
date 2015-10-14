@@ -45,7 +45,7 @@ void Camera::rotate(){
 }*/
 
 void Camera::rotation(){
-    setRot(0,1.0f);
+    setRot(0,0.1f);
     rotate();
 }
 
