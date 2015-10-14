@@ -3,14 +3,12 @@
 
 #include <QThread>
 #include <QTcpServer>
-#include "gamewindow.h"
 
 class ThreadServer : public QThread
 {
 
 public:
     ThreadServer();
-    ThreadServer(GameWindow* window);
     void run();
 
 signals :
@@ -19,7 +17,6 @@ signals :
 
 private:
     QTcpServer* server;
-    GameWindow* window;
 
 
 };

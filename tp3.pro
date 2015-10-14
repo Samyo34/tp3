@@ -19,3 +19,6 @@ QMAKE_MAC_SDK = macosx10.11
 
 RESOURCES += \
     gestionnaire.qrc
+
+QT += network
+TARGET = QTcpSocket
