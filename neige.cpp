@@ -29,7 +29,7 @@ void Neige::draw()
         flocon.at(i)->draw();
     }
 
-    std::cout<<"je suis ici"<<std::endl;
+   // std::cout<<"je suis ici"<<std::endl;
 }
 
 

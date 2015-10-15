@@ -13,6 +13,7 @@
 
 class GameWindow : public OpenGLWindow
 {
+    Q_OBJECT
 public:
     GameWindow();
     GameWindow(int fps);

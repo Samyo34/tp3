@@ -39,6 +39,7 @@ int main(int argc, char **argv)
     win60->setFormat(format);
     win60->resize(640, 480);
     win60->show();
+    win60->setSaison(1);
     win60->setAnimating(true);
 
     GameWindow* win120 = new GameWindow(60);
@@ -46,6 +47,7 @@ int main(int argc, char **argv)
     win120->setFormat(format);
     win120->resize(640, 480);
     win120->show();
+    win120->setSaison(2);
     win120->setAnimating(true);
 
     GameWindow* win30 = new GameWindow(60);
@@ -53,6 +55,7 @@ int main(int argc, char **argv)
     win30->setFormat(format);
     win30->resize(640, 480);
     win30->show();
+    win30->setSaison(3);
     win30->setAnimating(true);
 
     GameWindow* win = new GameWindow(60);
@@ -60,6 +63,7 @@ int main(int argc, char **argv)
     win->setFormat(format);
     win->resize(640, 480);
     win->show();
+    win->setSaison(4);
     win->setAnimating(true);
 
 
