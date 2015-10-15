@@ -16,6 +16,7 @@
 #include <QtGui>
 using namespace std;
 
+float val=0.9f;
 
 GameWindow::GameWindow()
 {
@@ -86,10 +87,12 @@ void GameWindow::render()
    /* glScalef(ss,ss,ss);// zoom, les trois paramètres correspondent aux trois axes
     glRotatef(rotX,1.0f,0.0f,0.0f);
     glRotatef(rotY,0.0f,0.0f,1.0f);*/
-    n->update();
-    n->draw();
+
     //this->camera->rotate();
     this->camera->rotation();
+    n->update();
+    n->draw();
+
     if(this->getSaison() == 1){// ete
         this->setColor(0.9f,0.7f,0.0f);
     }else if(this->getSaison() == 2){// automne
@@ -99,7 +102,22 @@ void GameWindow::render()
     }else if(this->getSaison() == 4){//printemps
         this->setColor(0.67f,1.0f,0.18f);
     }
+    /*glPointSize(3);
+    glBegin(GL_POINTS);
+    glVertex3f(0.5f,0.5f,0.5f);
+    glEnd();*/
 
+    glBegin(GL_LINES);
+    glVertex3f(0.0f,0.0f,0.0f);
+    glVertex3f(0.0f,0.0f,1.0f);
+    glColor3f(0.5f,0.5f,0.5f);
+    glVertex3f(0.0f,0.0f,0.0f);
+    glVertex3f(0.0f,1.0f,0.0f);
+
+    glColor3f(1.0f,0.0f,0.0f);
+    glVertex3f(0.0f,0.0f,0.0f);
+    glVertex3f(1.0f,0.0f,0.0f);
+    glEnd();
 
     this->camera->scale();
     switch(camera->getEtat())
@@ -496,11 +514,10 @@ int GameWindow::getSaison()
 
 void GameWindow::leChangementCMaintenant()
 {
-    qDebug()<<"changement de saison !";
+    qDebug()<<"changement de saison : "<<getSaison();
     int sais = getSaison()+1;
     if(sais>4){
         sais = 1;
     }
     setSaison(sais);
-    //TODO
 }

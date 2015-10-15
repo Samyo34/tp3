@@ -15,8 +15,5 @@ void ThreadClient::readData()
         QString result = socket->readLine();
         s += result;
     }
-
-    qDebug()<<"TCli : "<<s;
     emit change();
-    qDebug()<<"TCli : la";
 }

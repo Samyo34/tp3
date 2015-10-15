@@ -29,6 +29,7 @@ void ThreadServer::run(){
 void ThreadServer::emitSeason()
 {
     QString string = "changement";
+    qDebug()<<"Serveur : changement de saison";
     std::for_each(this->clients.begin(), this->clients.end(), [string](QTcpSocket *s){
        s->write(string.toUtf8());
        s->flush();

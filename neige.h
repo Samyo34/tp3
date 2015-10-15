@@ -17,6 +17,7 @@ public:
     float* part=new float[15];
     float getSpeed();
     void draw();
+    float getX();
 };
 
 
@@ -32,6 +33,7 @@ private:
     int hauteur;
     int largeur;
     QVector<Particule *> flocon;
+    void generateFlocon();
 
 };
 
