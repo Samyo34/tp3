@@ -43,7 +43,7 @@ void Neige::generateFlocon()
         valZ = (float) (qrand()%20 / 10.0f)-0.5f;
         speed = (float) (qrand()%4 / 1000.0f);
         if(speed ==0){
-            speed = 0.01f;
+            speed = 0.1f;
         }
         if(valX>1.0f){
             valX = 1.0f;
